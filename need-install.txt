@@ -1,0 +1,2 @@
+INSTALL
+ npx create-react-app web --template=typescrip
