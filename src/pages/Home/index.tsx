@@ -1,13 +1,29 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, useEffect, FormEvent, ChangeEvent } from 'react';
 import { FiLogIn, FiSearch, FiX } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 import './styles.css';
 import logo from '../../assets/logo.svg';
 
+interface IBGEUFResponse {
+    sigla: string;
+}
+
+interface IBGECityResponse {
+    nome: string;
+}
+
 const Home = () => {
     const [overlayStyle, setOverlayStyle] = useState<React.CSSProperties>({ 'display': 'none' });
     const [showOverlay, setShowOverlay] = useState<boolean>(true);
+
+    const history = useHistory();
+
+    const [ufs, setUfs] = useState<string[]>([]);
+    const [citys, setCitys] = useState<string[]>([]);
+    const [selectedUf, setSelectedUf] = useState('');
+    const [selectedCity, setSelectedCity] = useState('');
 
     function handleOverlay() {
         setShowOverlay(!showOverlay);
@@ -19,8 +35,45 @@ const Home = () => {
         }
     }
 
+    useEffect(() => {
+        axios.get<IBGEUFResponse[]>('https://servicodados.ibge.gov.br/api/v1/localidades/estados').then(response => {
+            const ufInitials = response.data.map(uf => uf.sigla);
+
+            setUfs(ufInitials.sort());
+        });
+    }, []);
+
+    useEffect(() => {
+        if(selectedUf === '') {
+            return;
+        }
+
+        axios
+            .get<IBGECityResponse[]>(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/municipios`)
+            .then(response => {
+                const cityNames = response.data.map(city => city.nome);
+                
+                setCitys(cityNames.sort((a, b) => {
+                    return a.localeCompare(b);
+                }));
+        });
+    }, [selectedUf]);
+
+    function handleSelectUf(event: ChangeEvent<HTMLSelectElement>) {
+        const uf = event.target.value;
+
+        setSelectedUf(uf);
+    }
+
+    function handleSelectCity(event: ChangeEvent<HTMLSelectElement>) {
+        const city = event.target.value;
+
+        setSelectedCity(city);
+    }
+
     function handleSubmit(event: FormEvent) {
         event.preventDefault();
+        history.push('/filtered-points', { selectedUf, selectedCity });
     }
 
     return (
@@ -40,23 +93,28 @@ const Home = () => {
                                 <select 
                                     name="uf" 
                                     id="uf" 
-                                    // value="" 
-                                    // onChange=""
+                                    value={selectedUf}
+                                    onChange={handleSelectUf}
                                 >
-                                    <option value="0">Selecione uma UF</option>
+                                    <option value="">Selecione uma UF</option>
+                                    {ufs.map(uf => (
+                                        <option key={uf} value={uf}>{uf}</option>
+                                    ))}
                                 </select>
                             </div>
                             <div className="field">
                                 <select 
                                     name="city" 
                                     id="city"
-                                    // value=""
-                                    // onChange=""
+                                    value={selectedCity}
+                                    onChange={handleSelectCity}
                                 >
-                                    <option value="0">Selecione uma Cidade</option>
+                                    <option value="">Selecione uma Cidade</option>
+                                    {citys.map(city => (
+                                        <option key={city} value={city}>{city}</option>
+                                    ))}
                                 </select>
                             </div>
-
                             <button type="submit">Buscar</button>
                         </form>
                     </main>

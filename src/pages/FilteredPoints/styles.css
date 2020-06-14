@@ -1,0 +1,73 @@
+#filtered-points {
+  width: 100%;
+  max-width: 1100px;
+
+  margin: 0 auto;
+}
+
+#filtered-points header {
+  margin-top: 48px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#filtered-points header a {
+  color: var(--title-color);
+  font-weight: bold;
+  text-decoration: none;
+
+  display: flex;
+  align-items: center;
+}
+
+#filtered-points header a svg {
+  margin-right: 16px;
+  color: var(--primary-color);
+}
+
+#filtered-points p.information-points {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+#filtered-points .points-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  list-style: none;
+}
+
+#filtered-points .points-grid li {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+
+#filtered-points .points-grid li strong {
+  display: block;
+  font-size: 28px;
+  color: #333;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#filtered-points .points-grid li span {
+  color: var(--primary-color);
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+@media(max-width: 900px) {
+  #filtered-points .points-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  #filtered-points .points-grid li {
+    width: 100%;
+    align-items: center;
+  }
+}
