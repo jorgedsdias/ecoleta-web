@@ -23,4 +23,100 @@ body, input, button {
 h1, h2, h3, h4, h5, h6 {
   color: var(--title-color);
   font-family: Ubuntu;
-}  
+}
+
+#overlay .overlay-black {
+  background-color:#000;
+  opacity: 90%;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#overlay .overlay-content,
+#overlay .overlay-result {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+}
+
+#overlay .overlay-content main,
+#overlay .overlay-result main {
+  width: 360px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#overlay .overlay-content main p,
+#overlay .overlay-result main p {
+  color: #FFF;
+  font-weight: bold;
+  font-size: 20px;
+  margin: 0 0 20px;
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+#overlay .overlay-result main p {
+  width: auto;
+}
+
+#overlay .overlay-result main svg {
+  color: var(--primary-color);
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+#overlay .overlay-content main p a {
+  color: #FFF;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+#overlay .overlay-content main form {
+  width: 100%;
+}
+
+#overlay .overlay-content main form .field select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  flex: 1;
+  background: #FFF;
+  border-radius: 8px;
+  border: 0;
+  padding: 16px 24px;
+  font-size: 16px;
+  color: #6C6C80;
+  width: 100%;
+  margin: 0 0 10px;
+  opacity:100%;
+}
+
+#overlay .overlay-content main form button {
+  width: 100%;
+  height: 56px;
+  background: var(--primary-color);
+  border-radius: 8px;
+  color: #FFF;
+  font-weight: bold;
+  font-size: 16px;
+  border: 0;
+  align-self: flex-end;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+#overlay .overlay-content main form button:hover {
+  background: #2FB86E;
+}

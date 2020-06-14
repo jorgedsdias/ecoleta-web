@@ -27,7 +27,7 @@ const Home = () => {
         <>
             <div id="overlay" style={overlayStyle}>
                 <div className="overlay-black"></div>
-                <div className="overlay-form">
+                <div className="overlay-content">
                     <main>
                         <p>
                             Pontos de coleta
