@@ -1,4 +1,4 @@
-import React, { useEffect, useState, ChangeEvent } from 'react';
+import React, { useEffect, useState, ChangeEvent, Dispatch, SetStateAction } from 'react';
 
 import axios from 'axios';
 
@@ -9,7 +9,7 @@ interface IBGECityResponse {
 interface myProps {
     selectedUf: string;
     selectedCity: string;
-    setSelectedCity: any;
+    setSelectedCity: Dispatch<SetStateAction<string>>;
 }
 
 const City = (props: myProps) => {

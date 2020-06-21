@@ -1,12 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 
 import './styles.css';
 import logo from '../../assets/logo.svg';
 
-const FilteredPoints = (props: any) => {
-    const { selectedUf, selectedCity } = props.location.state;
+interface myProps {
+    location: { 
+        state: {
+            filteredUf: string;
+            filteredCity: string;
+        }
+    };
+};
+
+const FilteredPoints = (props: myProps) => {
+    const [uf, setUf] = useState('');
+    const [city, setCity] = useState('');
+
+    useEffect(() => {
+        const { filteredUf, filteredCity } = props.location.state
+        setUf(filteredUf);
+        setCity(filteredCity);
+    }, []);
+
     return (
         <div id="filtered-points">
             <header>
@@ -18,6 +35,7 @@ const FilteredPoints = (props: any) => {
                 </Link>
             </header>
             <p className="information-points"><strong>2 pontos</strong> encontrados</p>
+            {uf} / {city}
             <ul className="points-grid">
                 <li>
                     <img src="http://localhost:3333/uploads/example.svg" alt="" />

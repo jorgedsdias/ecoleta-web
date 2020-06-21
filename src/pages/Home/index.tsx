@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, CSSProperties } from 'react';
 import { FiLogIn, FiSearch, FiX } from 'react-icons/fi';
 import { Link, useHistory } from 'react-router-dom';
 
@@ -7,9 +7,10 @@ import logo from '../../assets/logo.svg';
 
 import UF from '../../components/UF';
 import City from '../../components/City';
+import FilteredPoints from '../FilteredPoints';
 
 const Home = () => {
-    const [overlayStyle, setOverlayStyle] = useState<React.CSSProperties>({ 'display': 'none' });
+    const [overlayStyle, setOverlayStyle] = useState<CSSProperties>({ 'display': 'none' });
     const [showOverlay, setShowOverlay] = useState<boolean>(true);
 
     const history = useHistory();
@@ -29,7 +30,7 @@ const Home = () => {
 
     function handleSubmit(event: FormEvent) {
         event.preventDefault();
-        history.push('/filtered-points', { selectedUf, selectedCity });
+        history.push('/filtered-points', { filteredUf: selectedUf, filteredCity: selectedCity });
     }
 
     return (

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, ChangeEvent } from 'react';
+import React, { useEffect, useState, ChangeEvent, Dispatch, SetStateAction } from 'react';
 
 import axios from 'axios';
 
@@ -8,7 +8,7 @@ interface IBGEUFResponse {
 
 interface myProps {
     selectedUf: string;
-    setSelectedUf: any;
+    setSelectedUf: Dispatch<SetStateAction<string>>;
 }
 
 const UF = (props: myProps) => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent, FormEvent, CSSProperties } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiArrowLeft, FiCheckCircle } from 'react-icons/fi';
 import { Map, TileLayer, Marker } from 'react-leaflet';
@@ -34,7 +34,7 @@ const CreatePoint = () => {
 
     const history = useHistory();
 
-    const [overlayStyle, setOverlayStyle] = useState<React.CSSProperties>({ 'display': 'none' });
+    const [overlayStyle, setOverlayStyle] = useState<CSSProperties>({ 'display': 'none' });
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(position => {
