@@ -7,7 +7,6 @@ import logo from '../../assets/logo.svg';
 
 import UF from '../../components/UF';
 import City from '../../components/City';
-import FilteredPoints from '../FilteredPoints';
 
 const Home = () => {
     const [overlayStyle, setOverlayStyle] = useState<CSSProperties>({ 'display': 'none' });
