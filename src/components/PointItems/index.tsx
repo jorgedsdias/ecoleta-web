@@ -22,7 +22,7 @@ const PointItems = (props: myProps) => {
 
     return (
         <>
-            {items.map(item => `${item.title}, `)}
+            {items.map(item => `${item.title}`).join(', ')}
         </>
     );
 }

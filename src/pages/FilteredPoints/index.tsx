@@ -31,9 +31,9 @@ interface Point {
 
 const FilteredPoints = (props: myProps) => {
     const [points, setPoints] = useState<Point[]>([]);
+    const { filteredUf, filteredCity } = props.location.state;
 
     useEffect(() => {
-        const { filteredUf, filteredCity } = props.location.state;
         api.get(`points?city=${filteredCity}&uf=${filteredUf}`).then(response => {
             setPoints(response.data);
         });
@@ -49,15 +49,13 @@ const FilteredPoints = (props: myProps) => {
                     Voltar para home
                 </Link>
             </header>
-            <p className="information-points"><strong>{points.length} pontos</strong> encontrados</p>
+            <p className="information-points"><strong>{points.length} pontos</strong> encontrados em <strong>{filteredCity}/{filteredUf}</strong></p>
             <ul className="points-grid">
                 {points.map(point => (
                     <li>
                         <img src={point.image} alt="" width="352" height="198" />
                         <strong>{point.name}</strong>
                         <span><PointItems point_id={point.id} /></span>
-                        {/* <span>Resíduos Eletrôniocos, Lâmpadas, Papéis e Papelão</span> */}
-                        <p>{point.city}, {point.uf}</p>
                     </li>
                 ))}
             </ul>
