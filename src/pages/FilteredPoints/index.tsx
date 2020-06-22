@@ -6,6 +6,7 @@ import './styles.css';
 import logo from '../../assets/logo.svg';
 
 import api from '../../services/api';
+import PointItems from '../../components/PointItems';
 
 interface myProps {
     location: { 
@@ -54,7 +55,8 @@ const FilteredPoints = (props: myProps) => {
                     <li>
                         <img src={point.image} alt="" width="352" height="198" />
                         <strong>{point.name}</strong>
-                        <span>Resíduos Eletrôniocos, Lâmpadas, Papéis e Papelão</span>
+                        <span><PointItems point_id={point.id} /></span>
+                        {/* <span>Resíduos Eletrôniocos, Lâmpadas, Papéis e Papelão</span> */}
                         <p>{point.city}, {point.uf}</p>
                     </li>
                 ))}
